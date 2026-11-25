@@ -1,1 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animedle</title>
+  <style>
+    :root {
+      --bg: #121213;
+      --panel: #1e1e20;
+      --border: #3a3a3c;
+      --active-border: #60a5fa;
+      --text: #ffffff;
+      --muted: #a1a1aa;
+      --green: #538d4e;
+      --yellow: #b59f3b;
+      --gray: #3a3a3c;
+      --accent: #3b82f6;
+      --danger: #ef4444;
+    }
 
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    header {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    h1 { margin: 0; font-size: 1.6rem; letter-spacing: 2px; }
+    .stats-bar { display: flex; gap: 12px; font-size: 0.85rem; color: var(--muted); }
+    .stats-bar span strong { color: var(--text); }
+
+    button {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.15s;
+    }
+    button:hover:not(:disabled) { border-color: var(--text); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    button.primary { background: var(--accent); border-color: var(--accent); }
+    button.danger { border-color: var(--danger); color: #fca5a5; }
+
+    #menu {
+      max-width: 440px;
+      width: 100%;
+      background: var(--panel);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin-top: 20px;
+      display: none;
+    }
+    .diff-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .diff-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      font-size: 1rem;
+    }
+    .diff-btn small { color: var(--muted); font-weight: 400; }
+
+    #game {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 520px;
+      gap: 14px;
+    }
+
+    .anime-badge {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+    }
+    .anime-badge span { color: #60a5fa; font-weight: 700; }
+
+    .hints-panel {
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hints-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .hint-item {
+      font-size: 0.9rem;
+      background: #141416;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+    }
+
+    #board {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 6px 0;
+    }
+    .row { display: flex; gap: 6px; justify-content: center; }
+    .tile {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 4px;
+      user-select: none;
+      transition: transform 0.1s, border-color 0.15s;
+    }
+    .tile.active-row { border-color: #52525b; }
+    .tile.cursor {
+      border-color: var(--active-border);
+      box-shadow: 0 0 8px rgba(96, 165, 250, 0.45);
+      transform: scale(1.04);
+    }
+    .tile.correct { background: var(--green); border-color: var(--green); }
+    .tile.present { background: var(--yellow); border-color: var(--yellow); }
+    .tile.absent { background: var(--gray); border-color: var(--gray); }
+
+    .typing-status {
+      font-size: 0.8rem;
+      color: #60a5fa;
+      height: 18px;
+    }
+
+    #keyboard {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .kb-row { display: flex; justify-content: center; gap: 4px; }
+    .key {
+      height: 44px;
+      min-width: 30px;
+      padding: 0 8px;
+      background: #52525b;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      flex: 1;
+      max-width: 42px;
+    }
+    .key.wide { max-width: 68px; font-size: 0.75rem; }
+    .key.correct { background: var(--green); }
+    .key.present { background: var(--yellow); }
+    .key.absent { background: #27272a; color: #71717a; }
+
+    .controls { display: flex; gap: 10px; width: 100%; justify-content: space-between; }
+
+    #result {
+      display: none;
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    #char-img {
+      width: 130px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid var(--accent);
+      background: #09090b;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ANIMEDLE</h1>
+    <div class="stats-bar">
+      <span>Today: <strong id="stat-daily">0</strong></span>
+      <span>Total Wins: <strong id="stat-total">0</strong></span>
+      <span>Streak: <strong id="stat-streak">0</strong></span>
+    </div>
+  </header>
+
+  <div id="loading" style="text-align: center; margin-top: 50px; color: var(--muted);">Loading characters...</div>
+
+  <div id="menu">
+    <h2>Select Difficulty</h2>
+    <p style="color: var(--muted); font-size: 0.9rem;">Guess the anime character's first name in 5 tries.</p>
+    <div class="diff-grid">
+      <button class="diff-btn" onclick="startGame('easy')">
+        <span>Easy</span>
+        <small>5 Letters or less</small>
+      </button>
+      <button class="diff-btn" onclick="startGame('medium')">
+        <span>Medium</span>
+        <small>6 Letters</small>
+      </button>
+      <button class="diff-btn" onclick="startGame('hard')">
+        <span>Hard</span>
+        <small>7+ Letters</small>
+      </button>
+    </div>
+  </div>
+
+  <div id="game">
+    <div class="controls">
+      <button onclick="showMenu()">← Menu</button>
+      <div class="anime-badge">Anime: <span id="anime-name"></span></div>
+      <button class="danger" id="give-up-btn" onclick="giveUp()">Give Up</button>
+    </div>
+
+    <div class="hints-panel">
+      <div class="hints-header">
+        <span>Hints Revealed: <strong id="hint-count">1</strong>/3</span>
+        <button id="next-hint-btn" onclick="revealNextHint()">+ Reveal Next Hint</button>
+      </div>
+      <div id="hints-list"></div>
+    </div>
+
+    <div id="board"></div>
+    <div class="typing-status" id="typing-status">Ready — start typing on your keyboard!</div>
+
+    <div id="result">
+      <h3 id="result-title" style="margin: 0;"></h3>
+      <img id="char-img" src="" alt="Character Portrait" />
+      <p id="result-sub" style="margin: 0; color: var(--muted); font-size: 0.9rem;"></p>
+      <button class="primary" onclick="nextRound()">Play Next Character →</button>
+    </div>
+
+    <div id="keyboard"></div>
+  </div>
+
+  <script>
+    let allChars = [];
+    let mode = "easy";
+    let answer = null;
+    let len = 5;
+    let tries = [];
+    let typed = "";
+    let finished = false;
+    let hints = 1;
+    let letters = {};
+
+    const todayKey = new Date().toISOString().slice(0, 10);
+    let stats = JSON.parse(localStorage.getItem("animedle_stats") || "{}");
+    if (stats.date !== todayKey) {
+      stats = { date: todayKey, dailyWins: 0, totalWins: stats.totalWins || 0, streak: stats.streak || 0 };
+      saveStats();
+    }
+
+    let lastAnime = localStorage.getItem("animedle_last_anime") || "";
+    let usedNames = JSON.parse(localStorage.getItem("animedle_used") || "[]");
+
+    function saveStats() {
+      localStorage.setItem("animedle_stats", JSON.stringify(stats));
+      document.getElementById("stat-daily").textContent = stats.dailyWins;
+      document.getElementById("stat-total").textContent = stats.totalWins;
+      document.getElementById("stat-streak").textContent = stats.streak;
+    }
+    saveStats();
+
+    window.onload = () => {
+      fetch("data.json")
+        .then(res => {
+          if (!res.ok) throw new Error("Network error");
+          return res.json();
+        })
+        .then(data => {
+          allChars = data;
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("menu").style.display = "block";
+        })
+        .catch(err => {
+          document.getElementById("loading").textContent = "Could not load data.json. Check your files.";
+          console.error(err);
+        });
+    };
+
+    function startGame(m) {
+      mode = m;
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("game").style.display = "flex";
+      nextRound();
+    }
+
+    function showMenu() {
+      document.getElementById("game").style.display = "none";
+      document.getElementById("menu").style.display = "block";
+    }
+
+    function nextRound() {
+      let pool = allChars.filter(c => {
+        let l = c.name.length;
+        if (mode === "easy") return l <= 5;
+        if (mode === "medium") return l === 6;
+        return l >= 7;
+      });
+
+      let fresh = pool.filter(c => !usedNames.includes(c.name));
+      if (fresh.length === 0) {
+        usedNames = [];
+        fresh = pool;
+      }
+
+      let nonRepeat = fresh.filter(c => c.anime !== lastAnime);
+      let finalPool = nonRepeat.length > 0 ? nonRepeat : fresh;
+      
+      answer = finalPool[Math.floor(Math.random() * finalPool.length)];
+      len = answer.name.length;
+      tries = [];
+      typed = "";
+      finished = false;
+      hints = 1;
+      letters = {};
+      
+      lastAnime = answer.anime;
+      localStorage.setItem("animedle_last_anime", lastAnime);
+      
+      document.getElementById("anime-name").textContent = answer.anime;
+      document.getElementById("result").style.display = "none";
+      document.getElementById("give-up-btn").disabled = false;
+      document.getElementById("typing-status").textContent = `Type a ${len}-letter name...`;
+      
+      renderHints();
+      drawBoard();
+      drawKeys();
+    }
+
+    function renderHints() {
+      document.getElementById("hint-count").textContent = hints;
+      document.getElementById("next-hint-btn").disabled = hints >= 3 || finished;
+      let list = document.getElementById("hints-list");
+      list.innerHTML = "";
+      
+      for (let i = 0; i < hints; i++) {
+        let div = document.createElement("div");
+        div.className = "hint-item";
+        div.textContent = `Hint ${i + 1}: ${answer.hints[i]}`;
+        list.appendChild(div);
+      }
+    }
+
+    function revealNextHint() {
+      if (hints < 3 && !finished) {
+        hints++;
+        renderHints();
+      }
+    }
+
+    function drawBoard() {
+      let board = document.getElementById("board");
+      board.innerHTML = "";
+      let size = len >= 8 ? "40px" : "48px";
+      
+      for (let r = 0; r < 5; r++) {
+        let row = document.createElement("div");
+        row.className = "row";
+        let isCurrent = r === tries.length && !finished;
+        
+        for (let c = 0; c < len; c++) {
+          let tile = document.createElement("div");
+          tile.className = "tile";
+          tile.style.width = size;
+          tile.style.height = size;
+          
+          if (r < tries.length) {
+            tile.textContent = tries[r].word[c];
+            tile.classList.add(tries[r].colors[c]);
+          } else if (isCurrent) {
+            tile.classList.add("active-row");
+            tile.textContent = typed[c] || "";
+            if (c === typed.length) {
+              tile.classList.add("cursor");
+            }
+          }
+          row.appendChild(tile);
+        }
+        board.appendChild(row);
+      }
+    }
+
+    const kbRows = [
+      ["Q","W","E","R","T","Y","U","I","O","P"],
+      ["A","S","D","F","G","H","J","K","L"],
+      ["ENTER","Z","X","C","V","B","N","M","⌫"]
+    ];
+
+    function drawKeys() {
+      let kb = document.getElementById("keyboard");
+      kb.innerHTML = "";
+      
+      kbRows.forEach(rowKeys => {
+        let row = document.createElement("div");
+        row.className = "kb-row";
+        
+        rowKeys.forEach(k => {
+          let btn = document.createElement("button");
+          btn.className = "key" + (k.length > 1 ? " wide" : "");
+          btn.textContent = k;
+          if (letters[k]) btn.classList.add(letters[k]);
+          btn.onclick = () => typeKey(k);
+          row.appendChild(btn);
+        });
+        kb.appendChild(row);
+      });
+    }
+
+    document.addEventListener("keydown", e => {
+      if (document.getElementById("game").style.display !== "flex" || e.ctrlKey || e.metaKey || e.altKey) return;
+      let k = e.key.toUpperCase();
+      
+      if (k === "ENTER") typeKey("ENTER");
+      else if (k === "BACKSPACE") typeKey("⌫");
+      else if (/^[A-Z]$/.test(k)) typeKey(k);
+    });
+
+    function typeKey(k) {
+      if (finished) return;
+      let status = document.getElementById("typing-status");
+      
+      if (k === "⌫") {
+        typed = typed.slice(0, -1);
+        status.textContent = `Typing: ${typed.length}/${len}`;
+      } else if (k === "ENTER") {
+        if (typed.length < len) {
+          status.textContent = `Need ${len - typed.length} more letter(s)!`;
+          return;
+        }
+        submitGuess();
+        return;
+      } else if (typed.length < len) {
+        typed += k;
+        status.textContent = typed.length === len ? "Press ENTER to submit!" : `Typing: ${typed.length}/${len}`;
+      }
+      drawBoard();
+    }
+
+    function submitGuess() {
+      let colors = Array(len).fill("absent");
+      let targetArr = answer.name.split("");
+      let guessArr = typed.split("");
+      
+      for (let i = 0; i < len; i++) {
+        if (guessArr[i] === targetArr[i]) {
+          colors[i] = "correct";
+          targetArr[i] = null;
+          guessArr[i] = null;
+        }
+      }
+      
+      for (let i = 0; i < len; i++) {
+        if (guessArr[i] && targetArr.includes(guessArr[i])) {
+          colors[i] = "present";
+          targetArr[targetArr.indexOf(guessArr[i])] = null;
+        }
+      }
+
+      tries.push({ word: typed, colors: colors });
+      
+      for (let i = 0; i < len; i++) {
+        let ch = typed[i];
+        let col = colors[i];
+        if (col === "correct") letters[ch] = "correct";
+        else if (col === "present" && letters[ch] !== "correct") letters[ch] = "present";
+        else if (!letters[ch]) letters[ch] = "absent";
+      }
+      
+      let won = typed === answer.name;
+      typed = "";
+      drawBoard();
+      drawKeys();
+      
+      if (won) {
+        endRound(true);
+      } else if (tries.length >= 5) {
+        endRound(false);
+      } else {
+        document.getElementById("typing-status").textContent = `${5 - tries.length} tries remaining`;
+      }
+    }
+
+    function giveUp() {
+      if (!finished) endRound(false, true);
+    }
+
+    async function endRound(won, gaveUp = false) {
+      finished = true;
+      document.getElementById("give-up-btn").disabled = true;
+      document.getElementById("next-hint-btn").disabled = true;
+      document.getElementById("typing-status").textContent = "";
+      
+      usedNames.push(answer.name);
+      localStorage.setItem("animedle_used", JSON.stringify(usedNames));
+      
+      if (won) {
+        stats.dailyWins++;
+        stats.totalWins++;
+        stats.streak++;
+      } else {
+        stats.streak = 0;
+      }
+      saveStats();
+      
+      let card = document.getElementById("result");
+      document.getElementById("result-title").textContent = won ? `🎉 Correct! It's ${answer.fullName}!` : `${gaveUp ? "🏳️ Gave Up!" : "💀 Out of Tries!"} It was ${answer.fullName}`;
+      document.getElementById("result-sub").textContent = `From: ${answer.anime}`;
+      
+      let img = document.getElementById("char-img");
+      img.src = "";
+      img.alt = "Loading portrait...";
+      card.style.display = "flex";
+
+      try {
+        let res = await fetch(`https://api.jikan.moe/v4/characters?q=${encodeURIComponent(answer.fullName)}&limit=1`);
+        let json = await res.json();
+        if (json.data && json.data[0] && json.data[0].images && json.data[0].images.jpg) {
+          img.src = json.data[0].images.jpg.image_url;
+        }
+      } catch (err) {
+        img.alt = "Image unavailable offline";
+      }
+    }
+  </script>
+</body>
+</html>
