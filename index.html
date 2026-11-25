@@ -199,6 +199,17 @@
     .key.present { background: var(--yellow); }
     .key.absent { background: #27272a; color: #71717a; }
 
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 90;
+    }
+
     #result {
       display: none;
       position: fixed;
@@ -206,7 +217,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 90%;
-      max-width: 360px;
+      max-width: 340px;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -215,7 +226,7 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
       z-index: 100;
     }
     
@@ -231,6 +242,8 @@
       justify-content: center;
       color: var(--muted);
       font-size: 0.8rem;
+      text-align: center;
+      padding: 10px;
     }
 
     .anime-select {
@@ -300,14 +313,16 @@
 
     <div id="board"></div>
 
-    <div id="result">
-      <h3 id="result-title" style="margin: 0;"></h3>
-      <img id="char-img" src="" alt="Image not found" />
-      <p id="result-sub" style="margin: 0; color: var(--muted); font-size: 0.9rem;"></p>
-      <button class="primary" onclick="nextRound()" style="margin-top: 8px; width: 100%;">Next Character</button>
-    </div>
-
     <div id="keyboard"></div>
+  </div>
+
+  <div id="overlay"></div>
+
+  <div id="result">
+    <h3 id="result-title" style="margin: 0;"></h3>
+    <img id="char-img" src="" alt="Loading..." />
+    <p id="result-sub" style="margin: 0; color: var(--muted); font-size: 0.9rem;"></p>
+    <button class="primary" onclick="nextRound()" style="margin-top: 8px; width: 100%;">Next Character</button>
   </div>
 
   <script>
@@ -331,6 +346,7 @@
     
     let lastAnime = localStorage.getItem("animedle_last_anime") || "";
     let usedNames = JSON.parse(localStorage.getItem("animedle_used")) || [];
+    let imgCache = JSON.parse(localStorage.getItem("animedle_img_cache")) || {};
 
     function updateStats() {
       document.getElementById("stat-total").textContent = stats.wins;
@@ -340,6 +356,10 @@
     updateStats();
 
     window.onload = () => {
+      document.getElementById("board").addEventListener("animationend", function() {
+        this.classList.remove("shake");
+      });
+
       fetch("data.json")
         .then(res => res.json())
         .then(json => {
@@ -374,6 +394,7 @@
       document.getElementById("game").style.display = "none";
       document.getElementById("menu").style.display = "block";
       document.getElementById("result").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
     }
 
     function nextRound() {
@@ -417,6 +438,7 @@
       
       document.getElementById("anime-name").textContent = target.anime;
       document.getElementById("result").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
       document.getElementById("give-up-btn").disabled = false;
       document.getElementById("next-hint-btn").disabled = false;
       document.getElementById("hints-list").innerHTML = "";
@@ -531,8 +553,9 @@
       } else if (k === "ENTER") {
         if (currentTyped.length < wordLen) {
           let board = document.getElementById("board");
+          board.classList.remove("shake");
+          void board.offsetWidth; 
           board.classList.add("shake");
-          setTimeout(() => board.classList.remove("shake"), 400);
           return;
         }
         submitGuess();
@@ -610,24 +633,43 @@
       let sub = document.getElementById("result-sub");
       let img = document.getElementById("char-img");
       
-      title.textContent = won ? `Correct!` : `Game Over!`;
+      title.textContent = won ? "Correct!" : "Game Over!";
       sub.textContent = `It was ${target.fullName}`;
       
       img.src = "";
       img.alt = "Loading...";
       
+      img.onerror = function() {
+        this.onerror = null;
+        this.alt = "No Image Available";
+      };
+      
       card.style.display = "flex";
+      document.getElementById("overlay").style.display = "block";
+
+      if (imgCache[target.name]) {
+        img.src = imgCache[target.name];
+        return;
+      }
 
       try {
-        let res = await fetch(`https://api.jikan.moe/v4/characters?q=${encodeURIComponent(target.fullName)}&limit=1`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+        
+        let res = await fetch(`https://api.jikan.moe/v4/characters?q=${encodeURIComponent(target.name)}&limit=1`, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        
         let json = await res.json();
         if (json.data && json.data[0] && json.data[0].images && json.data[0].images.jpg) {
-          img.src = json.data[0].images.jpg.image_url;
+          let imgUrl = json.data[0].images.jpg.image_url;
+          img.src = imgUrl;
+          imgCache[target.name] = imgUrl;
+          localStorage.setItem("animedle_img_cache", JSON.stringify(imgCache));
         } else {
-          img.alt = "No Image";
+          img.alt = "No Image Available";
         }
       } catch (err) {
-        img.alt = "No Image";
+        img.alt = "Image Unavailable";
       }
     }
   </script>
