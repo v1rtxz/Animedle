@@ -653,18 +653,22 @@
       }
 
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4000);
+        const query = encodeURIComponent(target.fullName);
+        const url = `https://api.jikan.moe/v4/characters?q=${query}&limit=1`;
         
-        let res = await fetch(`https://api.jikan.moe/v4/characters?q=${encodeURIComponent(target.name)}&limit=1`, { signal: controller.signal });
-        clearTimeout(timeoutId);
-        
+        let res = await fetch(url);
         let json = await res.json();
-        if (json.data && json.data[0] && json.data[0].images && json.data[0].images.jpg) {
-          let imgUrl = json.data[0].images.jpg.image_url;
-          img.src = imgUrl;
-          imgCache[target.name] = imgUrl;
-          localStorage.setItem("animedle_img_cache", JSON.stringify(imgCache));
+        
+        if (json.data && json.data[0] && json.data[0].images) {
+          let imgUrl = json.data[0].images.jpg?.image_url || json.data[0].images.webp?.image_url;
+          
+          if (imgUrl) {
+            img.src = imgUrl;
+            imgCache[target.name] = imgUrl;
+            localStorage.setItem("animedle_img_cache", JSON.stringify(imgCache));
+          } else {
+            img.alt = "No Image Available";
+          }
         } else {
           img.alt = "No Image Available";
         }
