@@ -33,27 +33,28 @@
 
     header {
       width: 100%;
-      max-width: 520px;
+      max-width: 500px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       margin-bottom: 16px;
     }
 
-    h1 { margin: 0; font-size: 1.6rem; letter-spacing: 2px; }
-    .stats-bar { display: flex; gap: 12px; font-size: 0.85rem; color: var(--muted); }
-    .stats-bar span strong { color: var(--text); }
+    h1 { margin: 0; font-size: 1.5rem; letter-spacing: 2px; }
+    .stats { display: flex; gap: 12px; font-size: 0.8rem; color: var(--muted); }
+    .stats span strong { color: var(--text); }
 
     button {
       background: var(--panel);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 8px 14px;
+      padding: 8px 12px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 0.9rem;
       transition: 0.15s;
     }
     button:hover:not(:disabled) { border-color: var(--text); }
@@ -62,16 +63,17 @@
     button.danger { border-color: var(--danger); color: #fca5a5; }
 
     #menu {
-      max-width: 440px;
+      max-width: 400px;
       width: 100%;
       background: var(--panel);
       padding: 24px;
       border-radius: 12px;
       border: 1px solid var(--border);
       text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
       display: none;
     }
+    
     .diff-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
     .diff-btn {
       display: flex;
@@ -87,24 +89,25 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 520px;
-      gap: 14px;
+      max-width: 500px;
+      gap: 12px;
     }
 
+    .top-bar { display: flex; justify-content: space-between; width: 100%; gap: 8px; }
     .anime-badge {
       background: var(--panel);
       border: 1px solid var(--border);
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 0.95rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
     }
     .anime-badge span { color: #60a5fa; font-weight: 700; }
 
-    .hints-panel {
+    .hints-box {
       width: 100%;
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 12px;
       display: flex;
       flex-direction: column;
@@ -114,10 +117,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--muted);
     }
-    .hint-item {
+    .hint-text {
       font-size: 0.9rem;
       background: #141416;
       padding: 8px 10px;
@@ -132,6 +135,7 @@
       margin: 6px 0;
     }
     .row { display: flex; gap: 6px; justify-content: center; }
+    
     .tile {
       width: 48px;
       height: 48px;
@@ -149,17 +153,18 @@
     .tile.active-row { border-color: #52525b; }
     .tile.cursor {
       border-color: var(--active-border);
-      box-shadow: 0 0 8px rgba(96, 165, 250, 0.45);
-      transform: scale(1.04);
+      box-shadow: 0 0 6px rgba(96, 165, 250, 0.4);
     }
     .tile.correct { background: var(--green); border-color: var(--green); }
     .tile.present { background: var(--yellow); border-color: var(--yellow); }
     .tile.absent { background: var(--gray); border-color: var(--gray); }
 
-    .typing-status {
-      font-size: 0.8rem;
-      color: #60a5fa;
-      height: 18px;
+    .shake { animation: shake 0.4s; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-3px); }
     }
 
     #keyboard {
@@ -167,13 +172,13 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 10px;
     }
     .kb-row { display: flex; justify-content: center; gap: 4px; }
     .key {
       height: 44px;
       min-width: 30px;
-      padding: 0 8px;
+      padding: 0;
       background: #52525b;
       border: none;
       border-radius: 4px;
@@ -182,13 +187,13 @@
       text-transform: uppercase;
       flex: 1;
       max-width: 42px;
+      color: white;
+      cursor: pointer;
     }
-    .key.wide { max-width: 68px; font-size: 0.75rem; }
+    .key.wide { max-width: 65px; font-size: 0.75rem; }
     .key.correct { background: var(--green); }
     .key.present { background: var(--yellow); }
     .key.absent { background: #27272a; color: #71717a; }
-
-    .controls { display: flex; gap: 10px; width: 100%; justify-content: space-between; }
 
     #result {
       display: none;
@@ -196,19 +201,25 @@
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 18px;
+      padding: 20px;
       text-align: center;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      margin-top: 10px;
     }
     #char-img {
-      width: 130px;
-      height: 170px;
+      width: 120px;
+      height: 160px;
       object-fit: cover;
       border-radius: 8px;
       border: 2px solid var(--accent);
       background: #09090b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.8rem;
     }
   </style>
 </head>
@@ -216,110 +227,99 @@
 
   <header>
     <h1>ANIMEDLE</h1>
-    <div class="stats-bar">
-      <span>Today: <strong id="stat-daily">0</strong></span>
-      <span>Total Wins: <strong id="stat-total">0</strong></span>
+    <div class="stats">
+      <span>Wins: <strong id="stat-total">0</strong></span>
       <span>Streak: <strong id="stat-streak">0</strong></span>
     </div>
   </header>
 
-  <div id="loading" style="text-align: center; margin-top: 50px; color: var(--muted);">Loading characters...</div>
+  <div id="loading" style="margin-top: 50px; color: var(--muted);">Loading...</div>
 
   <div id="menu">
     <h2>Select Difficulty</h2>
-    <p style="color: var(--muted); font-size: 0.9rem;">Guess the anime character's first name in 5 tries.</p>
+    <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Guess the anime character in 5 tries.</p>
     <div class="diff-grid">
       <button class="diff-btn" onclick="startGame('easy')">
         <span>Easy</span>
-        <small>5 Letters or less</small>
+        <small>5 letters or less</small>
       </button>
       <button class="diff-btn" onclick="startGame('medium')">
         <span>Medium</span>
-        <small>6 Letters</small>
+        <small>6 letters</small>
       </button>
       <button class="diff-btn" onclick="startGame('hard')">
         <span>Hard</span>
-        <small>7+ Letters</small>
+        <small>7+ letters</small>
       </button>
     </div>
   </div>
 
   <div id="game">
-    <div class="controls">
-      <button onclick="showMenu()">← Menu</button>
+    <div class="top-bar">
+      <button onclick="showMenu()">Menu</button>
       <div class="anime-badge">Anime: <span id="anime-name"></span></div>
       <button class="danger" id="give-up-btn" onclick="giveUp()">Give Up</button>
     </div>
 
-    <div class="hints-panel">
+    <div class="hints-box" id="hints-box">
       <div class="hints-header">
-        <span>Hints Revealed: <strong id="hint-count">1</strong>/3</span>
-        <button id="next-hint-btn" onclick="revealNextHint()">+ Reveal Next Hint</button>
+        <span>Hints</span>
+        <button id="next-hint-btn" onclick="revealHint()" style="padding: 4px 8px; font-size: 0.75rem;">Reveal Hint</button>
       </div>
-      <div id="hints-list"></div>
+      <div id="hints-list" style="display: flex; flex-direction: column; gap: 6px;"></div>
     </div>
 
     <div id="board"></div>
-    <div class="typing-status" id="typing-status">Ready — start typing on your keyboard!</div>
 
     <div id="result">
       <h3 id="result-title" style="margin: 0;"></h3>
-      <img id="char-img" src="" alt="Character Portrait" />
+      <img id="char-img" src="" alt="Image not found" />
       <p id="result-sub" style="margin: 0; color: var(--muted); font-size: 0.9rem;"></p>
-      <button class="primary" onclick="nextRound()">Play Next Character →</button>
+      <button class="primary" onclick="nextRound()">Next Character</button>
     </div>
 
     <div id="keyboard"></div>
   </div>
 
   <script>
-    let allChars = [];
-    let mode = "easy";
-    let answer = null;
-    let len = 5;
-    let tries = [];
-    let typed = "";
-    let finished = false;
-    let hints = 1;
-    let letters = {};
+    let data = [];
+    let currentMode = "easy";
+    let target = null;
+    let wordLen = 5;
+    let guesses = [];
+    let currentTyped = "";
+    let isGameOver = false;
+    
+    let hintIndexes = [];
+    let hintsShown = 0;
+    let keyStates = {};
 
-    const todayKey = new Date().toISOString().slice(0, 10);
-    let stats = JSON.parse(localStorage.getItem("animedle_stats") || "{}");
-    if (stats.date !== todayKey) {
-      stats = { date: todayKey, dailyWins: 0, totalWins: stats.totalWins || 0, streak: stats.streak || 0 };
-      saveStats();
-    }
-
+    let stats = JSON.parse(localStorage.getItem("animedle_stats")) || { wins: 0, streak: 0 };
     let lastAnime = localStorage.getItem("animedle_last_anime") || "";
-    let usedNames = JSON.parse(localStorage.getItem("animedle_used") || "[]");
+    let usedNames = JSON.parse(localStorage.getItem("animedle_used")) || [];
 
-    function saveStats() {
-      localStorage.setItem("animedle_stats", JSON.stringify(stats));
-      document.getElementById("stat-daily").textContent = stats.dailyWins;
-      document.getElementById("stat-total").textContent = stats.totalWins;
+    function updateStats() {
+      document.getElementById("stat-total").textContent = stats.wins;
       document.getElementById("stat-streak").textContent = stats.streak;
+      localStorage.setItem("animedle_stats", JSON.stringify(stats));
     }
-    saveStats();
+    updateStats();
 
     window.onload = () => {
       fetch("data.json")
-        .then(res => {
-          if (!res.ok) throw new Error("Network error");
-          return res.json();
-        })
-        .then(data => {
-          allChars = data;
+        .then(res => res.json())
+        .then(json => {
+          data = json;
           document.getElementById("loading").style.display = "none";
           document.getElementById("menu").style.display = "block";
         })
-        .catch(err => {
-          document.getElementById("loading").textContent = "Could not load data.json. Check your files.";
-          console.error(err);
+        .catch(() => {
+          document.getElementById("loading").textContent = "Failed to load data.json";
         });
     };
 
-    function startGame(m) {
-      mode = m;
+    function startGame(mode) {
+      currentMode = mode;
       document.getElementById("menu").style.display = "none";
       document.getElementById("game").style.display = "flex";
       nextRound();
@@ -331,10 +331,10 @@
     }
 
     function nextRound() {
-      let pool = allChars.filter(c => {
+      let pool = data.filter(c => {
         let l = c.name.length;
-        if (mode === "easy") return l <= 5;
-        if (mode === "medium") return l === 6;
+        if (currentMode === "easy") return l <= 5;
+        if (currentMode === "medium") return l === 6;
         return l >= 7;
       });
 
@@ -347,71 +347,82 @@
       let nonRepeat = fresh.filter(c => c.anime !== lastAnime);
       let finalPool = nonRepeat.length > 0 ? nonRepeat : fresh;
       
-      answer = finalPool[Math.floor(Math.random() * finalPool.length)];
-      len = answer.name.length;
-      tries = [];
-      typed = "";
-      finished = false;
-      hints = 1;
-      letters = {};
+      target = finalPool[Math.floor(Math.random() * finalPool.length)];
+      wordLen = target.name.length;
       
-      lastAnime = answer.anime;
+      guesses = [];
+      currentTyped = "";
+      isGameOver = false;
+      hintsShown = 1;
+      keyStates = {};
+      
+      lastAnime = target.anime;
       localStorage.setItem("animedle_last_anime", lastAnime);
       
-      document.getElementById("anime-name").textContent = answer.anime;
+      document.getElementById("anime-name").textContent = target.anime;
       document.getElementById("result").style.display = "none";
       document.getElementById("give-up-btn").disabled = false;
-      document.getElementById("typing-status").textContent = `Type a ${len}-letter name...`;
-      
-      renderHints();
-      drawBoard();
-      drawKeys();
+      document.getElementById("next-hint-btn").disabled = false;
+      document.getElementById("hints-list").innerHTML = "";
+
+      if (currentMode === "easy") {
+        hintIndexes = [2, 1, 0];
+      } else if (currentMode === "medium") {
+        hintIndexes = [1, 0, 2];
+      } else {
+        hintIndexes = [0, 1, 2];
+      }
+
+      showHint();
+      renderBoard();
+      renderKeys();
     }
 
-    function renderHints() {
-      document.getElementById("hint-count").textContent = hints;
-      document.getElementById("next-hint-btn").disabled = hints >= 3 || finished;
-      let list = document.getElementById("hints-list");
-      list.innerHTML = "";
+    function showHint() {
+      if (hintsShown > 3) return;
+      let box = document.getElementById("hints-list");
+      let div = document.createElement("div");
+      div.className = "hint-text";
       
-      for (let i = 0; i < hints; i++) {
-        let div = document.createElement("div");
-        div.className = "hint-item";
-        div.textContent = `Hint ${i + 1}: ${answer.hints[i]}`;
-        list.appendChild(div);
+      let hintData = target.hints[hintIndexes[hintsShown - 1]];
+      div.textContent = `Hint ${hintsShown}: ${hintData}`;
+      box.appendChild(div);
+      
+      if (hintsShown === 3) {
+        document.getElementById("next-hint-btn").disabled = true;
       }
     }
 
-    function revealNextHint() {
-      if (hints < 3 && !finished) {
-        hints++;
-        renderHints();
+    function revealHint() {
+      if (hintsShown < 3 && !isGameOver) {
+        hintsShown++;
+        showHint();
       }
     }
 
-    function drawBoard() {
+    function renderBoard() {
       let board = document.getElementById("board");
       board.innerHTML = "";
-      let size = len >= 8 ? "40px" : "48px";
+      let size = wordLen >= 8 ? "38px" : "48px";
       
       for (let r = 0; r < 5; r++) {
         let row = document.createElement("div");
         row.className = "row";
-        let isCurrent = r === tries.length && !finished;
+        let isCurrentRow = r === guesses.length && !isGameOver;
         
-        for (let c = 0; c < len; c++) {
+        for (let c = 0; c < wordLen; c++) {
           let tile = document.createElement("div");
           tile.className = "tile";
           tile.style.width = size;
           tile.style.height = size;
           
-          if (r < tries.length) {
-            tile.textContent = tries[r].word[c];
-            tile.classList.add(tries[r].colors[c]);
-          } else if (isCurrent) {
+          if (r < guesses.length) {
+            tile.textContent = guesses[r].word[c];
+            tile.classList.add(guesses[r].colors[c]);
+          } else if (isCurrentRow) {
             tile.classList.add("active-row");
-            tile.textContent = typed[c] || "";
-            if (c === typed.length) {
+            tile.textContent = currentTyped[c] || "";
+            if (c === currentTyped.length) {
               tile.classList.add("cursor");
             }
           }
@@ -427,7 +438,7 @@
       ["ENTER","Z","X","C","V","B","N","M","⌫"]
     ];
 
-    function drawKeys() {
+    function renderKeys() {
       let kb = document.getElementById("keyboard");
       kb.innerHTML = "";
       
@@ -439,8 +450,8 @@
           let btn = document.createElement("button");
           btn.className = "key" + (k.length > 1 ? " wide" : "");
           btn.textContent = k;
-          if (letters[k]) btn.classList.add(letters[k]);
-          btn.onclick = () => typeKey(k);
+          if (keyStates[k]) btn.classList.add(keyStates[k]);
+          btn.onclick = () => handleInput(k);
           row.appendChild(btn);
         });
         kb.appendChild(row);
@@ -451,38 +462,37 @@
       if (document.getElementById("game").style.display !== "flex" || e.ctrlKey || e.metaKey || e.altKey) return;
       let k = e.key.toUpperCase();
       
-      if (k === "ENTER") typeKey("ENTER");
-      else if (k === "BACKSPACE") typeKey("⌫");
-      else if (/^[A-Z]$/.test(k)) typeKey(k);
+      if (k === "ENTER") handleInput("ENTER");
+      else if (k === "BACKSPACE") handleInput("⌫");
+      else if (/^[A-Z]$/.test(k)) handleInput(k);
     });
 
-    function typeKey(k) {
-      if (finished) return;
-      let status = document.getElementById("typing-status");
+    function handleInput(k) {
+      if (isGameOver) return;
       
       if (k === "⌫") {
-        typed = typed.slice(0, -1);
-        status.textContent = `Typing: ${typed.length}/${len}`;
+        currentTyped = currentTyped.slice(0, -1);
       } else if (k === "ENTER") {
-        if (typed.length < len) {
-          status.textContent = `Need ${len - typed.length} more letter(s)!`;
+        if (currentTyped.length < wordLen) {
+          let board = document.getElementById("board");
+          board.classList.add("shake");
+          setTimeout(() => board.classList.remove("shake"), 400);
           return;
         }
         submitGuess();
         return;
-      } else if (typed.length < len) {
-        typed += k;
-        status.textContent = typed.length === len ? "Press ENTER to submit!" : `Typing: ${typed.length}/${len}`;
+      } else if (currentTyped.length < wordLen) {
+        currentTyped += k;
       }
-      drawBoard();
+      renderBoard();
     }
 
     function submitGuess() {
-      let colors = Array(len).fill("absent");
-      let targetArr = answer.name.split("");
-      let guessArr = typed.split("");
+      let colors = Array(wordLen).fill("absent");
+      let targetArr = target.name.split("");
+      let guessArr = currentTyped.split("");
       
-      for (let i = 0; i < len; i++) {
+      for (let i = 0; i < wordLen; i++) {
         if (guessArr[i] === targetArr[i]) {
           colors[i] = "correct";
           targetArr[i] = null;
@@ -490,76 +500,79 @@
         }
       }
       
-      for (let i = 0; i < len; i++) {
+      for (let i = 0; i < wordLen; i++) {
         if (guessArr[i] && targetArr.includes(guessArr[i])) {
           colors[i] = "present";
           targetArr[targetArr.indexOf(guessArr[i])] = null;
         }
       }
 
-      tries.push({ word: typed, colors: colors });
+      guesses.push({ word: currentTyped, colors: colors });
       
-      for (let i = 0; i < len; i++) {
-        let ch = typed[i];
+      for (let i = 0; i < wordLen; i++) {
+        let ch = currentTyped[i];
         let col = colors[i];
-        if (col === "correct") letters[ch] = "correct";
-        else if (col === "present" && letters[ch] !== "correct") letters[ch] = "present";
-        else if (!letters[ch]) letters[ch] = "absent";
+        if (col === "correct") keyStates[ch] = "correct";
+        else if (col === "present" && keyStates[ch] !== "correct") keyStates[ch] = "present";
+        else if (!keyStates[ch]) keyStates[ch] = "absent";
       }
       
-      let won = typed === answer.name;
-      typed = "";
-      drawBoard();
-      drawKeys();
+      let won = currentTyped === target.name;
+      currentTyped = "";
+      renderBoard();
+      renderKeys();
       
       if (won) {
-        endRound(true);
-      } else if (tries.length >= 5) {
-        endRound(false);
-      } else {
-        document.getElementById("typing-status").textContent = `${5 - tries.length} tries remaining`;
+        endGame(true);
+      } else if (guesses.length >= 5) {
+        endGame(false);
       }
     }
 
     function giveUp() {
-      if (!finished) endRound(false, true);
+      if (!isGameOver) endGame(false);
     }
 
-    async function endRound(won, gaveUp = false) {
-      finished = true;
+    async function endGame(won) {
+      isGameOver = true;
       document.getElementById("give-up-btn").disabled = true;
       document.getElementById("next-hint-btn").disabled = true;
-      document.getElementById("typing-status").textContent = "";
       
-      usedNames.push(answer.name);
+      usedNames.push(target.name);
       localStorage.setItem("animedle_used", JSON.stringify(usedNames));
       
       if (won) {
-        stats.dailyWins++;
-        stats.totalWins++;
+        stats.wins++;
         stats.streak++;
       } else {
         stats.streak = 0;
       }
-      saveStats();
+      updateStats();
       
       let card = document.getElementById("result");
-      document.getElementById("result-title").textContent = won ? `🎉 Correct! It's ${answer.fullName}!` : `${gaveUp ? "🏳️ Gave Up!" : "💀 Out of Tries!"} It was ${answer.fullName}`;
-      document.getElementById("result-sub").textContent = `From: ${answer.anime}`;
-      
+      let title = document.getElementById("result-title");
+      let sub = document.getElementById("result-sub");
       let img = document.getElementById("char-img");
+      
+      title.textContent = won ? `Correct!` : `Game Over!`;
+      sub.textContent = `It was ${target.fullName}`;
+      
       img.src = "";
-      img.alt = "Loading portrait...";
+      img.alt = "Loading...";
+      img.style.display = "flex";
+      
       card.style.display = "flex";
 
       try {
-        let res = await fetch(`https://api.jikan.moe/v4/characters?q=${encodeURIComponent(answer.fullName)}&limit=1`);
+        let res = await fetch(`https://api.jikan.moe/v4/characters?q=${encodeURIComponent(target.fullName)}&limit=1`);
         let json = await res.json();
         if (json.data && json.data[0] && json.data[0].images && json.data[0].images.jpg) {
           img.src = json.data[0].images.jpg.image_url;
+        } else {
+          img.alt = "No Image";
         }
       } catch (err) {
-        img.alt = "Image unavailable offline";
+        img.alt = "No Image";
       }
     }
   </script>
