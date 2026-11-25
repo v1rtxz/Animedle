@@ -346,7 +346,6 @@
     
     let lastAnime = localStorage.getItem("animedle_last_anime") || "";
     let usedNames = JSON.parse(localStorage.getItem("animedle_used")) || [];
-    let imgCache = JSON.parse(localStorage.getItem("animedle_img_cache")) || {};
 
     function updateStats() {
       document.getElementById("stat-total").textContent = stats.wins;
@@ -612,40 +611,7 @@
       if (!isGameOver) endGame(false);
     }
 
-    async function fetchImageWithRetry(fullName, retries = 3) {
-      const query = encodeURIComponent(fullName);
-      const url = `https://api.jikan.moe/v4/characters?q=${query}&limit=1`;
-
-      for (let i = 0; i < retries; i++) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-          const res = await fetch(url, { signal: controller.signal });
-          clearTimeout(timeoutId);
-
-          if (res.status === 429) {
-            await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-            continue;
-          }
-
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-          const json = await res.json();
-          if (json.data && json.data[0] && json.data[0].images) {
-            const imgUrl = json.data[0].images.jpg?.image_url || json.data[0].images.webp?.image_url;
-            if (imgUrl) return imgUrl;
-          }
-          return null;
-        } catch (err) {
-          if (i === retries - 1) throw err;
-          await new Promise(r => setTimeout(r, 1000 * (i + 1)));
-        }
-      }
-      return null;
-    }
-
-    async function endGame(won) {
+    function endGame(won) {
       isGameOver = true;
       document.getElementById("give-up-btn").disabled = true;
       document.getElementById("next-hint-btn").disabled = true;
@@ -669,29 +635,11 @@
       title.textContent = won ? "Correct!" : "Game Over!";
       sub.textContent = `It was ${target.fullName}`;
       
-      img.src = "";
-      img.alt = "Loading...";
+      img.src = target.image || "";
+      img.alt = target.image ? "Character Image" : "No Image Available";
       
       card.style.display = "flex";
       document.getElementById("overlay").style.display = "block";
-
-      if (imgCache[target.name]) {
-        img.src = imgCache[target.name];
-        return;
-      }
-
-      try {
-        const imgUrl = await fetchImageWithRetry(target.fullName);
-        if (imgUrl) {
-          img.src = imgUrl;
-          imgCache[target.name] = imgUrl;
-          localStorage.setItem("animedle_img_cache", JSON.stringify(imgCache));
-        } else {
-          img.alt = "No Image Available";
-        }
-      } catch (err) {
-        img.alt = "Image Unavailable";
-      }
     }
   </script>
 </body>
