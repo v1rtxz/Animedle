@@ -100,6 +100,10 @@
       padding: 8px 12px;
       border-radius: 6px;
       font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 60%;
     }
     .anime-badge span { color: #60a5fa; font-weight: 700; }
 
@@ -197,17 +201,24 @@
 
     #result {
       display: none;
-      width: 100%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 360px;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 20px;
+      padding: 24px;
       text-align: center;
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      margin-top: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      z-index: 100;
     }
+    
     #char-img {
       width: 120px;
       height: 160px;
@@ -220,6 +231,19 @@
       justify-content: center;
       color: var(--muted);
       font-size: 0.8rem;
+    }
+
+    .anime-select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      outline: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      appearance: none;
     }
   </style>
 </head>
@@ -238,6 +262,11 @@
   <div id="menu">
     <h2>Select Difficulty</h2>
     <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Guess the anime character in 5 tries.</p>
+    
+    <select id="anime-select" class="anime-select" style="margin-bottom: 16px;">
+      <option value="all">All Anime</option>
+    </select>
+
     <div class="diff-grid">
       <button class="diff-btn" onclick="startGame('easy')">
         <span>Easy</span>
@@ -275,7 +304,7 @@
       <h3 id="result-title" style="margin: 0;"></h3>
       <img id="char-img" src="" alt="Image not found" />
       <p id="result-sub" style="margin: 0; color: var(--muted); font-size: 0.9rem;"></p>
-      <button class="primary" onclick="nextRound()">Next Character</button>
+      <button class="primary" onclick="nextRound()" style="margin-top: 8px; width: 100%;">Next Character</button>
     </div>
 
     <div id="keyboard"></div>
@@ -294,7 +323,12 @@
     let hintsShown = 0;
     let keyStates = {};
 
-    let stats = JSON.parse(localStorage.getItem("animedle_stats")) || { wins: 0, streak: 0 };
+    let savedStats = JSON.parse(localStorage.getItem("animedle_stats")) || {};
+    let stats = {
+      wins: parseInt(savedStats.wins, 10) || 0,
+      streak: parseInt(savedStats.streak, 10) || 0
+    };
+    
     let lastAnime = localStorage.getItem("animedle_last_anime") || "";
     let usedNames = JSON.parse(localStorage.getItem("animedle_used")) || [];
 
@@ -310,11 +344,22 @@
         .then(res => res.json())
         .then(json => {
           data = json;
+          
+          let animes = [...new Set(data.map(c => c.anime))].sort();
+          let select = document.getElementById("anime-select");
+          
+          animes.forEach(a => {
+            let opt = document.createElement("option");
+            opt.value = a;
+            opt.textContent = a;
+            select.appendChild(opt);
+          });
+
           document.getElementById("loading").style.display = "none";
           document.getElementById("menu").style.display = "block";
         })
         .catch(() => {
-          document.getElementById("loading").textContent = "Failed to load data.json";
+          document.getElementById("loading").textContent = "Failed to load data.";
         });
     };
 
@@ -328,15 +373,26 @@
     function showMenu() {
       document.getElementById("game").style.display = "none";
       document.getElementById("menu").style.display = "block";
+      document.getElementById("result").style.display = "none";
     }
 
     function nextRound() {
+      let selectedAnime = document.getElementById("anime-select").value;
+      
       let pool = data.filter(c => {
+        if (selectedAnime !== "all" && c.anime !== selectedAnime) return false;
+        
         let l = c.name.length;
         if (currentMode === "easy") return l <= 5;
         if (currentMode === "medium") return l === 6;
         return l >= 7;
       });
+
+      if (pool.length === 0) {
+        alert("No characters found for this combination. Try another difficulty or anime.");
+        showMenu();
+        return;
+      }
 
       let fresh = pool.filter(c => !usedNames.includes(c.name));
       if (fresh.length === 0) {
@@ -459,7 +515,7 @@
     }
 
     document.addEventListener("keydown", e => {
-      if (document.getElementById("game").style.display !== "flex" || e.ctrlKey || e.metaKey || e.altKey) return;
+      if (document.getElementById("game").style.display !== "flex" || e.ctrlKey || e.metaKey || e.altKey || isGameOver) return;
       let k = e.key.toUpperCase();
       
       if (k === "ENTER") handleInput("ENTER");
@@ -559,7 +615,6 @@
       
       img.src = "";
       img.alt = "Loading...";
-      img.style.display = "flex";
       
       card.style.display = "flex";
 
