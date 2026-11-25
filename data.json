@@ -4,9 +4,9 @@
     "fullName": "Monkey D. Luffy",
     "anime": "One Piece",
     "hints": [
-      "Wears an iconic straw hat given to him by Shanks.",
-      "Ate the Gomu Gomu no Mi, turning his body to rubber.",
-      "Captain of the Straw Hat Pirates aiming to be King of the Pirates."
+      "Ate a Devil Fruit that turned his body to rubber.",
+      "Captain of a pirate crew aiming to be King of the Pirates.",
+      "Wears an iconic straw hat given to him by Shanks."
     ]
   },
   {
@@ -14,9 +14,9 @@
     "fullName": "Eren Yeager",
     "anime": "Attack on Titan",
     "hints": [
-      "Grew up inside Wall Maria in the Shiganshina District.",
+      "Possesses the power of the Attack and Founding Titans.",
       "Swore to wipe out every single Titan after losing his mother.",
-      "Possesses the power of the Attack and Founding Titans."
+      "Grew up inside Wall Maria in the Shiganshina District."
     ]
   },
   {
@@ -24,9 +24,9 @@
     "fullName": "Rem",
     "anime": "Re:ZERO -Starting Life in Another World-",
     "hints": [
-      "Works as a maid at Roswaal's mansion alongside her twin sister.",
       "Wields a spiked morningstar flail and has a single white horn.",
-      "Has blue hair and is fiercely devoted to Subaru."
+      "Has blue hair and is fiercely devoted to Subaru.",
+      "Works as a maid at a mansion alongside her twin sister."
     ]
   },
   {
@@ -34,9 +34,9 @@
     "fullName": "Spike Spiegel",
     "anime": "Cowboy Bebop",
     "hints": [
-      "A laid-back bounty hunter cruising space aboard the Bebop.",
+      "Has a cybernetic right eye and a fluffy dark green afro.",
       "Practices Jeet Kune Do and pilots a red Swordfish II fighter.",
-      "Has a cybernetic right eye and a fluffy dark green afro."
+      "A laid-back bounty hunter cruising space aboard the Bebop."
     ]
   },
   {
@@ -44,8 +44,8 @@
     "fullName": "Asuna Yuuki",
     "anime": "Sword Art Online",
     "hints": [
-      "Known as 'The Flash' for her blinding rapier speed.",
       "Served as sub-leader of the Knights of the Blood Oath guild.",
+      "Known as 'The Flash' for her blinding rapier speed.",
       "Fell in love with Kirito while trapped on Aincrad."
     ]
   },
@@ -54,9 +54,9 @@
     "fullName": "Denji",
     "anime": "Chainsaw Man",
     "hints": [
-      "Worked off his father's yakuza debt by hunting devils with Pochita.",
       "Pulls a starter cord on his chest to transform.",
-      "Joined Public Safety Division 4 mostly for good food and a normal life."
+      "Joined Public Safety Division 4 mostly for good food.",
+      "Worked off his father's yakuza debt by hunting devils with Pochita."
     ]
   },
   {
@@ -65,8 +65,8 @@
     "anime": "Dragon Ball Z",
     "hints": [
       "Sent to Earth as an infant to destroy it, but bumped his head.",
-      "Constantly seeks stronger opponents to fight.",
-      "Uses the Kamehameha and goes Super Saiyan."
+      "Uses the Kamehameha and goes Super Saiyan.",
+      "Constantly seeks stronger opponents to fight."
     ]
   },
   {
@@ -74,9 +74,9 @@
     "fullName": "Naruto Uzumaki",
     "anime": "Naruto",
     "hints": [
-      "Loves eating Ichiraku Ramen and wears an orange jumpsuit.",
       "Has the Nine-Tailed Fox sealed inside him.",
-      "Always yells 'Believe it!' and dreams of becoming Hokage."
+      "Always yells 'Believe it!' and dreams of becoming Hokage.",
+      "Loves eating Ichiraku Ramen and wears an orange jumpsuit."
     ]
   },
   {
@@ -84,9 +84,9 @@
     "fullName": "Subaru Natsuki",
     "anime": "Re:ZERO -Starting Life in Another World-",
     "hints": [
-      "Was suddenly transported to another world outside a convenience store.",
+      "Possesses 'Return by Death', rewinding time whenever he dies.",
       "Wears an iconic black-and-orange tracksuit.",
-      "Possesses 'Return by Death', rewinding time whenever he dies."
+      "Was suddenly transported to another world outside a convenience store."
     ]
   },
   {
@@ -94,9 +94,9 @@
     "fullName": "Rudeus Greyrat",
     "anime": "Mushoku Tensei: Jobless Reincarnation",
     "hints": [
-      "Reincarnated into a fantasy world while keeping his past-life memories.",
+      "Earned the nickname 'Quagmire' during his time as an adventurer.",
       "Trained in water magic by Roxy Migurdia as a child.",
-      "Earned the nickname 'Quagmire' during his time as an adventurer."
+      "Reincarnated into a fantasy world while keeping his past-life memories."
     ]
   },
   {
@@ -104,9 +104,9 @@
     "fullName": "Satoru Gojo",
     "anime": "Jujutsu Kaisen",
     "hints": [
-      "Covers his bright blue Six Eyes with a black blindfold or sunglasses.",
+      "Uses the Limitless technique and Domain Expansion: Infinite Void.",
       "Considered the strongest jujutsu sorcerer alive.",
-      "Uses the Limitless technique and Domain Expansion: Infinite Void."
+      "Covers his bright blue Six Eyes with a blindfold or sunglasses."
     ]
   },
   {
@@ -114,9 +114,9 @@
     "fullName": "Edward Elric",
     "anime": "Fullmetal Alchemist: Brotherhood",
     "hints": [
-      "Lost his right arm and left leg in a failed human transmutation.",
       "Can perform alchemy without drawing a transmutation circle.",
-      "Gets furious whenever anyone calls him short."
+      "Gets furious whenever anyone calls him short.",
+      "Lost his right arm and left leg in a failed human transmutation."
     ]
   },
   {
@@ -124,9 +124,9 @@
     "fullName": "Killua Zoldyck",
     "anime": "Hunter x Hunter",
     "hints": [
+      "Transmutes his aura into deadly electricity.",
       "Ran away from his famous family of elite assassins.",
-      "Best friends with Gon Freecss and loves chocolate robots.",
-      "Transmutes his aura into deadly electricity."
+      "Best friends with Gon Freecss and loves chocolate robots."
     ]
   },
   {
@@ -134,9 +134,9 @@
     "fullName": "Tanjiro Kamado",
     "anime": "Demon Slayer",
     "hints": [
-      "Carries his demon sister Nezuko inside a wooden box on his back.",
+      "Uses Water & Sun Breathing.",
       "Possesses an extraordinarily sharp sense of smell.",
-      "Wears a green-and-black checkered haori and uses Water & Sun Breathing."
+      "Carries his demon sister inside a wooden box on his back."
     ]
   },
   {
@@ -144,9 +144,9 @@
     "fullName": "Lelouch Lamperouge",
     "anime": "Code Geass",
     "hints": [
-      "An exiled Britannian prince attending Ashford Academy.",
+      "Commands absolute obedience from anyone who makes eye contact with his left eye.",
       "Leads the Black Knights under the masked identity 'Zero'.",
-      "Commands absolute obedience from anyone who makes eye contact with his left eye."
+      "An exiled Britannian prince attending Ashford Academy."
     ]
   },
   {
@@ -154,9 +154,9 @@
     "fullName": "Thorfinn",
     "anime": "Vinland Saga",
     "hints": [
-      "Followed Askeladd's mercenary band for years seeking a fair duel.",
+      "Son of the legendary Jomsviking warrior Thors.",
       "Wields twin daggers in battle before swearing off violence.",
-      "Son of the legendary Jomsviking warrior Thors."
+      "Followed Askeladd's mercenary band for years seeking a fair duel."
     ]
   },
   {
@@ -164,9 +164,9 @@
     "fullName": "Alphonse Elric",
     "anime": "Fullmetal Alchemist: Brotherhood",
     "hints": [
+      "Has a soft spot for stray kittens.",
       "His soul is bound to a giant hollow suit of steel armor.",
-      "Frequently mistaken for the 'Fullmetal Alchemist' instead of his brother.",
-      "Has a soft spot for stray kittens."
+      "Frequently mistaken for the 'Fullmetal Alchemist'."
     ]
   },
   {
@@ -174,9 +174,9 @@
     "fullName": "Kakashi Hatake",
     "anime": "Naruto",
     "hints": [
-      "Known across nations as the 'Copy Ninja' who copied over 1,000 jutsu.",
+      "Invented the Lightning Blade (Chidori).",
       "Always late to meetings and reads 'Make-Out Paradise' in public.",
-      "Led Team 7 and invented the Lightning Blade."
+      "Known across nations as the 'Copy Ninja'."
     ]
   },
   {
@@ -184,9 +184,9 @@
     "fullName": "Mikasa Ackerman",
     "anime": "Attack on Titan",
     "hints": [
-      "Adopted by the Yeager family after her parents were murdered.",
+      "An elite soldier of the Survey Corps with superhuman strength.",
       "Wears a red scarf given to her by Eren.",
-      "An elite soldier of the Survey Corps with superhuman strength."
+      "Adopted by the Yeager family after her parents were murdered."
     ]
   },
   {
@@ -194,9 +194,9 @@
     "fullName": "Levi Ackerman",
     "anime": "Attack on Titan",
     "hints": [
-      "Known as humanity's strongest soldier.",
+      "Captain of the Survey Corps Special Operations Squad.",
       "Obsessively clean and short in stature.",
-      "Captain of the Survey Corps Special Operations Squad."
+      "Known as humanity's strongest soldier."
     ]
   },
   {
@@ -204,9 +204,9 @@
     "fullName": "Saitama",
     "anime": "One Punch Man",
     "hints": [
-      "A hero who can defeat any enemy with a single punch.",
+      "Registered as a Class B hero and is obsessed with bargain sales.",
       "Lost all his hair due to his intense training regimen.",
-      "Registered as a Class B hero and is obsessed with bargain sales."
+      "A hero who can defeat any enemy with a single punch."
     ]
   },
   {
@@ -214,9 +214,9 @@
     "fullName": "Kurapika",
     "anime": "Hunter x Hunter",
     "hints": [
-      "The last survivor of the Kurta clan.",
+      "Uses chains as his primary weapon and Nen ability.",
       "His eyes turn scarlet when he becomes emotional.",
-      "Uses chains as his primary weapon and Nen ability."
+      "The last survivor of the Kurta clan."
     ]
   },
   {
@@ -224,9 +224,9 @@
     "fullName": "Frieren",
     "anime": "Frieren: Beyond Journey's End",
     "hints": [
-      "An elf mage who outlived her party members.",
+      "Known for her extreme apathy and love for Zoltraak.",
       "Collects weird grimoires and spells.",
-      "Known for her extreme apathy and love for Zoltraak."
+      "An elf mage who outlived her party members."
     ]
   },
   {
@@ -234,8 +234,8 @@
     "fullName": "Zenitsu Agatsuma",
     "anime": "Demon Slayer",
     "hints": [
-      "A cowardly demon slayer who only fights when unconscious.",
       "Uses Thunder Breathing, specifically the first form.",
+      "A cowardly demon slayer who only fights when unconscious.",
       "Has a massive crush on Nezuko."
     ]
   },
@@ -244,9 +244,9 @@
     "fullName": "Inosuke Hashibira",
     "anime": "Demon Slayer",
     "hints": [
-      "Raised by boars in the mountains.",
+      "Uses Beast Breathing.",
       "Wears a boar's head mask and uses two jagged swords.",
-      "Uses Beast Breathing."
+      "Raised by boars in the mountains."
     ]
   },
   {
@@ -254,9 +254,9 @@
     "fullName": "Itachi Uchiha",
     "anime": "Naruto Shippuden",
     "hints": [
-      "A prodigy of the Konoha military police clan who joined the Akatsuki.",
       "Wears a ring with the kanji for 'Vermilion' and uses crow clones.",
-      "Massacred his clan to protect his younger brother Sasuke."
+      "Massacred his clan to protect his younger brother Sasuke.",
+      "A prodigy of the Konoha military police clan who joined the Akatsuki."
     ]
   },
   {
@@ -264,9 +264,9 @@
     "fullName": "Armin Arlert",
     "anime": "Attack on Titan",
     "hints": [
-      "Childhood friend of Eren and Mikasa.",
+      "Inherited the Colossal Titan.",
       "Known for his strategic intellect rather than combat skills.",
-      "Inherited the Colossal Titan."
+      "Childhood friend of Eren and Mikasa."
     ]
   },
   {
@@ -274,9 +274,9 @@
     "fullName": "Hange Zoe",
     "anime": "Attack on Titan",
     "hints": [
-      "Obsessed with researching Titans.",
       "Becomes the 14th commander of the Survey Corps.",
-      "Often wears goggles and has messy hair."
+      "Often wears goggles and has messy hair.",
+      "Obsessed with researching Titans."
     ]
   },
   {
@@ -284,9 +284,9 @@
     "fullName": "Shanks",
     "anime": "One Piece",
     "hints": [
-      "Captain of the Red Hair Pirates and one of the Four Emperors.",
+      "Known for his incredible Haki.",
       "Lost his left arm saving Luffy.",
-      "Known for his incredible Haki."
+      "Captain of the Red Hair Pirates and one of the Four Emperors."
     ]
   },
   {
@@ -294,9 +294,9 @@
     "fullName": "Vinsmoke Sanji",
     "anime": "One Piece",
     "hints": [
-      "The Straw Hats' cook and a master of kicks.",
+      "Always swoons over beautiful women.",
       "Refuses to use his hands in battle to protect them for cooking.",
-      "Always swoons over beautiful women."
+      "The Straw Hats' cook and a master of kicks."
     ]
   },
   {
@@ -304,9 +304,9 @@
     "fullName": "Roronoa Zoro",
     "anime": "One Piece",
     "hints": [
-      "A master swordsman who uses the Three-Sword Style.",
+      "Wields the Enma sword.",
       "Has no sense of direction and often gets lost.",
-      "Wields the Enma sword."
+      "A master swordsman who uses the Three-Sword Style."
     ]
   },
   {
@@ -314,9 +314,9 @@
     "fullName": "Nami",
     "anime": "One Piece",
     "hints": [
-      "The Straw Hats' navigator.",
+      "Uses a staff to control the weather.",
       "A skilled thief and cartographer.",
-      "Uses a staff to control the weather."
+      "The Straw Hats' navigator."
     ]
   },
   {
@@ -324,9 +324,9 @@
     "fullName": "Power",
     "anime": "Chainsaw Man",
     "hints": [
-      "The Blood Fiend.",
+      "Has horns and a messy appearance.",
       "Loves cats and fighting.",
-      "Has horns and a messy appearance."
+      "The Blood Fiend."
     ]
   },
   {
@@ -334,9 +334,9 @@
     "fullName": "Makima",
     "anime": "Chainsaw Man",
     "hints": [
-      "A high-ranking Public Safety Devil Hunter.",
+      "Has a distinct red-haired look and wears suits.",
       "Controls people through her mysterious powers.",
-      "Has a distinct red-haired look and wears suits."
+      "A high-ranking Public Safety Devil Hunter."
     ]
   },
   {
@@ -344,9 +344,9 @@
     "fullName": "Satoru Gojo",
     "anime": "Jujutsu Kaisen",
     "hints": [
-      "The strongest sorcerer.",
+      "Wears a blindfold to protect others from his eyes.",
       "Mentor to Yuji Itadori.",
-      "Wears a blindfold to protect others from his eyes."
+      "The strongest sorcerer."
     ]
   },
   {
@@ -354,9 +354,9 @@
     "fullName": "Yuji Itadori",
     "anime": "Jujutsu Kaisen",
     "hints": [
-      "Swallowed a cursed object to save his friends.",
+      "Uses Divergent Fist and Black Flash.",
       "Host of the King of Curses.",
-      "Uses Divergent Fist and Black Flash."
+      "Swallowed a cursed object to save his friends."
     ]
   },
   {
@@ -364,9 +364,9 @@
     "fullName": "Nobara Kugisaki",
     "anime": "Jujutsu Kaisen",
     "hints": [
-      "A first-year at Tokyo Jujutsu High.",
+      "Extremely confident and fashionable.",
       "Uses a hammer and nails as her weapons.",
-      "Extremely confident and fashionable."
+      "A first-year at Tokyo Jujutsu High."
     ]
   },
   {
@@ -374,9 +374,9 @@
     "fullName": "Katsuki Bakugo",
     "anime": "My Hero Academia",
     "hints": [
-      "Childhood rival of Izuku Midoriya who wants to surpass All Might.",
-      "Ignites nitroglycerin-like sweat from his palms to create explosions.",
-      "Chose the hero name 'Great Explosion Murder God Dynamight'."
+      "Chose the hero name 'Great Explosion Murder God Dynamight'.",
+      "Ignites nitroglycerin-like sweat from his palms.",
+      "Childhood rival of Izuku Midoriya."
     ]
   },
   {
@@ -384,9 +384,9 @@
     "fullName": "Izuku Midoriya",
     "anime": "My Hero Academia",
     "hints": [
-      "Born quirkless but inherited One For All.",
+      "Writes notes on every hero he meets.",
       "Cries very easily.",
-      "Writes notes on every hero he meets."
+      "Born quirkless but inherited One For All."
     ]
   },
   {
@@ -394,9 +394,9 @@
     "fullName": "Shoto Todoroki",
     "anime": "My Hero Academia",
     "hints": [
-      "Son of the number two hero, Endeavor.",
+      "Can use both fire and ice.",
       "Has heterochromia and a scar on his left eye.",
-      "Can use both fire and ice."
+      "Son of the number two hero, Endeavor."
     ]
   },
   {
@@ -404,9 +404,9 @@
     "fullName": "Megumi Fushiguro",
     "anime": "Jujutsu Kaisen",
     "hints": [
-      "A first-year student at Tokyo Jujutsu High with spiky dark hair.",
-      "Uses shadow puppets to summon shikigami like Divine Dogs.",
-      "Inherited the prized Ten Shadows Technique."
+      "Inherited the prized Ten Shadows Technique.",
+      "Uses shadow puppets to summon shikigami.",
+      "A first-year student at Tokyo Jujutsu High."
     ]
   },
   {
@@ -414,9 +414,9 @@
     "fullName": "Hisoka Morow",
     "anime": "Hunter x Hunter",
     "hints": [
-      "A mysterious magician with a love for fighting strong opponents.",
+      "Often seen with a star and teardrop painted on his face.",
       "Uses Bungee Gum, which has the properties of both rubber and gum.",
-      "Often seen with a star and teardrop painted on his face."
+      "A mysterious magician with a love for fighting strong opponents."
     ]
   },
   {
@@ -424,9 +424,9 @@
     "fullName": "Feitan Portor",
     "anime": "Hunter x Hunter",
     "hints": [
-      "A member of the Phantom Troupe.",
+      "His Nen ability is Pain Packer, which turns pain into heat.",
       "Specializes in torture and uses a sword.",
-      "His Nen ability is Pain Packer, which turns pain into heat."
+      "A member of the Phantom Troupe."
     ]
   },
   {
@@ -434,9 +434,9 @@
     "fullName": "Meruem",
     "anime": "Hunter x Hunter",
     "hints": [
-      "The King of the Chimera Ants.",
+      "Develops a bond with the blind girl Komugi.",
       "Extremely powerful and ruthless.",
-      "Develops a bond with the blind girl Komugi."
+      "The King of the Chimera Ants."
     ]
   },
   {
@@ -444,9 +444,9 @@
     "fullName": "Nezuko Kamado",
     "anime": "Demon Slayer",
     "hints": [
-      "Turned into a demon by Muzan.",
+      "Can use Blood Demon Art: Exploding Blood.",
       "Wears a bamboo muzzle to stop herself from biting people.",
-      "Can use Blood Demon Art: Exploding Blood."
+      "Turned into a demon by Muzan."
     ]
   },
   {
@@ -454,9 +454,9 @@
     "fullName": "Yor Forger",
     "anime": "Spy x Family",
     "hints": [
-      "An assassin known as the Thorn Princess.",
+      "Wields twin stilettos hidden in her dress.",
       "Pretends to be a housewife in a fake marriage.",
-      "Wields twin stilettos hidden in her dress."
+      "An assassin known as the Thorn Princess."
     ]
   },
   {
@@ -464,9 +464,9 @@
     "fullName": "Anya Forger",
     "anime": "Spy x Family",
     "hints": [
-      "A telepath adopted by Loid Forger.",
+      "Has pink hair and wears a black hairband.",
       "Loves watching the anime 'Spy Wars'.",
-      "Has pink hair and wears a black hairband."
+      "A telepath adopted by Loid Forger."
     ]
   },
   {
@@ -474,9 +474,9 @@
     "fullName": "Loid Forger",
     "anime": "Spy x Family",
     "hints": [
-      "A master spy codenamed Twilight.",
+      "Adopts a telepathic daughter and marries an assassin.",
       "Needs to form a fake family for Operation Strix.",
-      "Adopts a telepathic daughter and marries an assassin."
+      "A master spy codenamed Twilight."
     ]
   },
   {
@@ -484,9 +484,49 @@
     "fullName": "Himmel",
     "anime": "Frieren: Beyond Journey's End",
     "hints": [
-      "The hero who defeated the Demon King.",
+      "Frieren only realized her feelings for him after his death.",
       "Was known for his charm and heroism.",
-      "Frieren only realized her feelings for him after his death."
+      "The hero who defeated the Demon King."
+    ]
+  },
+  {
+    "name": "AIZEN",
+    "fullName": "Sosuke Aizen",
+    "anime": "Bleach",
+    "hints": [
+      "Uses Kyoka Suigetsu to control all five senses.",
+      "Betrayed the Soul Society and created his own Arrancar army.",
+      "A former captain of the 5th Division."
+    ]
+  },
+  {
+    "name": "ICHIGO",
+    "fullName": "Ichigo Kurosaki",
+    "anime": "Bleach",
+    "hints": [
+      "Wields a giant cleaver-like Zanpakuto.",
+      "A substitute Soul Reaper with orange hair.",
+      "Has a Hollow mask and uses Getsuga Tensho."
+    ]
+  },
+  {
+    "name": "RENGOKU",
+    "fullName": "Kyojuro Rengoku",
+    "anime": "Demon Slayer",
+    "hints": [
+      "Uses Flame Breathing.",
+      "Has very distinctive eyebrows and bright yellow hair.",
+      "The Flame Hashira who fought Akaza."
+    ]
+  },
+  {
+    "name": "MAKISE",
+    "fullName": "Makise Kurisu",
+    "anime": "Steins;Gate",
+    "hints": [
+      "A genius neuroscience researcher.",
+      "Often teased for being a 'tsundere'.",
+      "Helped Okabe build the Phone Microwave."
     ]
   }
 ]
